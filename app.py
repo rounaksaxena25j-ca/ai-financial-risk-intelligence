@@ -3134,7 +3134,6 @@ if st.session_state.active_analysis_tab == "risk":
                     use_container_width=True
                 ):
                     st.session_state.selected_risk = r
-                    st.rerun()
 
     else:
         st.success(
