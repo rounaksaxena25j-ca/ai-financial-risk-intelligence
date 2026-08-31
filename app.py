@@ -3134,6 +3134,7 @@ if st.session_state.active_analysis_tab == "risk":
                     use_container_width=True
                 ):
                     st.session_state.selected_risk = r
+                    st.session_state.investigation_debug = True
 
     else:
         st.success(
@@ -3151,6 +3152,7 @@ if st.session_state.active_analysis_tab == "risk":
         """,
         unsafe_allow_html=True
     )
+    st.write("DEBUG CLICK:", st.session_state.get("investigation_debug", False))
     selected_risk = st.session_state.get("selected_risk", None)
     if selected_risk is not None:
         r = selected_risk
