@@ -3272,79 +3272,44 @@ if st.session_state.active_analysis_tab == "risk":
                 unsafe_allow_html=True
             )
 
-            st.markdown(
-                f"""
-                <div class="investigation-detail-card">
-                    <div class="investigation-detail-title">
-                        Financial Assessment
-                    </div>
-                    <div class="investigation-detail-text">
-                        {r.get("flagged_reason", "Not available")}
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True
+            st.markdown("### Financial Assessment")
+            st.write(
+                r.get(
+                    "flagged_reason",
+                    "Not available"
+                )
             )
-
             c1, c2 = st.columns(2)
-
             with c1:
-                st.markdown(
-                    f"""
-                    <div class="investigation-detail-card">
-                        <div class="investigation-detail-title">
-                            Financial Evidence
-                        </div>
-                        <div class="investigation-evidence">
-                            {r.get("evidence", "Not available")}
-                        </div>
-                    </div>
-
-                    <div class="investigation-detail-card">
-                        <div class="investigation-detail-title">
-                            Financial Impact
-                        </div>
-                        <div class="investigation-detail-text">
-                            {r.get(
-                                "why_it_matters",
-                                "Cannot determine from available data."
-                            )}
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
+                st.markdown("#### Financial Evidence")
+                st.write(
+                    r.get(
+                        "evidence",
+                        "Not available"
+                    )
                 )
-
+                st.markdown("#### Financial Impact")
+                st.write(
+                    r.get(
+                        "why_it_matters",
+                        "Cannot determine from available data."
+                    )
+                )
             with c2:
-                st.markdown(
-                    f"""
-                    <div class="investigation-detail-card">
-                        <div class="investigation-detail-title">
-                            Assessment Implication
-                        </div>
-                        <div class="investigation-detail-text">
-                            {r.get(
-                                "implications",
-                                "No additional implication available."
-                            )}
-                        </div>
-                    </div>
-
-                    <div class="investigation-detail-card">
-                        <div class="investigation-detail-title">
-                            Recommended Review
-                        </div>
-                        <div class="investigation-detail-text">
-                            {r.get(
-                                "what_to_check",
-                                "Additional review required."
-                            )}
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
+                st.markdown("#### Assessment Implication")
+                st.write(
+                    r.get(
+                        "implications",
+                        "No additional implication available."
+                    )
                 )
-
+                st.markdown("#### Recommended Review")
+                st.write(
+                    r.get(
+                        "what_to_check",
+                        "Additional review required."
+                    )
+                )
             documents = r.get("documents_required", [])
 
             if isinstance(documents, list) and documents:
