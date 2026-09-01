@@ -3134,7 +3134,6 @@ if st.session_state.active_analysis_tab == "risk":
                     use_container_width=True
                 ):
                     st.session_state.selected_risk = r
-                    st.session_state.investigation_debug = True
                     st.rerun()
 
     else:
@@ -3153,12 +3152,9 @@ if st.session_state.active_analysis_tab == "risk":
         """,
         unsafe_allow_html=True
     )
-    st.write("DEBUG CLICK:", st.session_state.get("investigation_debug", False))
-    st.write("DEBUG SELECTED RISK:", st.session_state.get("selected_risk", "NOT SET"))
     selected_risk = st.session_state.get("selected_risk", None)
     if selected_risk is not None:
         r = selected_risk
-        st.write("DEBUG TYPE:", type(r).__name__)
         if isinstance(r, dict):
             title = r.get("title", "Risk Item")
             badge = r.get("badge", "🔴")
@@ -3167,7 +3163,6 @@ if st.session_state.active_analysis_tab == "risk":
                 "flagged_reason",
                 "Flagged by analysis engine."
             )
-            st.write("DEBUG PANEL: investigation panel reached")
             st.markdown(
                 f"""
                 <div class="investigation-panel">
