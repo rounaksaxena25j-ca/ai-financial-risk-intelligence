@@ -2600,45 +2600,281 @@ if isinstance(raw_risks, dict):
                 "color_class": color_class,
                 "flagged_reason": evidence,
                 "evidence": evidence,
-                "what_changed": evidence,
-                "why_it_matters": financial_impact,
-                "implications": financial_impact,
-                "what_to_check": recommended_action,
+                "what_changed": (
+                    {
+                        "Liquidity Risk": (
+                            f"The analysis identified a liquidity-related observation: {evidence} "
+                            f"The investigation should determine whether the reported current-asset "
+                            f"position represents genuinely available liquidity or whether a material "
+                            f"portion is tied up in receivables, inventory or other assets that may not "
+                            f"convert to cash when required. The current ratio should therefore be "
+                            f"considered together with cash balances, operating cash generation, "
+                            f"short-term obligations and near-term funding requirements."
+                        ),
+                        "Collection Risk": (
+                            f"The analysis identified a collection-related observation: {evidence} "
+                            f"The key issue is whether reported trade receivables are being converted "
+                            f"into cash within commercially reasonable credit periods. The investigation "
+                            f"should establish whether overdue balances have increased, whether the "
+                            f"exposure is concentrated among particular customers, and whether balances "
+                            f"outstanding at year-end were subsequently collected."
+                        ),
+                        "Inventory Risk": (
+                            f"The analysis identified an inventory-related observation: {evidence} "
+                            f"The investigation should establish whether the reported inventory balance "
+                            f"is supported by physical quantities, appropriate valuation and expected "
+                            f"future sale or use. Particular attention should be given to slow-moving, "
+                            f"obsolete, damaged or unusually aged items and to movements that are not "
+                            f"consistent with sales and production activity."
+                        ),
+                        "Leverage Risk": (
+                            f"The analysis identified a leverage-related observation: {evidence} "
+                            f"The investigation should determine whether the reported debt position "
+                            f"is consistent with the company's repayment capacity, contractual "
+                            f"obligations and operating cash generation. Particular attention should "
+                            f"be given to new borrowings, refinancing dependence, repayment pressure, "
+                            f"interest obligations and potential covenant issues."
+                        ),
+                        "Profitability Risk": (
+                            f"The analysis identified a profitability-related observation: {evidence} "
+                            f"The investigation should determine whether reported margins and profits "
+                            f"are supported by sustainable revenue, appropriate cost recognition and "
+                            f"normal operating activity. Unusual period-end income, one-off gains, "
+                            f"expense classification changes and significant margin movements should "
+                            f"be separately assessed."
+                        ),
+                        "Cash-Flow Risk": (
+                            f"The analysis identified a cash-flow-related observation: {evidence} "
+                            f"The investigation should reconcile reported profit with operating cash "
+                            f"generation and establish which working-capital or non-cash movements "
+                            f"explain the difference. Particular attention should be given to whether "
+                            f"cash generation is consistently weaker than accounting earnings."
+                        ),
+                        "Earnings Quality Risk": (
+                            f"The analysis identified an earnings-quality observation: {evidence} "
+                            f"The investigation should determine whether reported accounting earnings "
+                            f"are supported by underlying cash generation and sustainable operating "
+                            f"activity. Persistent differences between profit and operating cash flow, "
+                            f"rapid receivables growth or unusual working-capital movements should "
+                            f"be investigated rather than treated as isolated fluctuations."
+                        )
+                    }.get(
+                        risk_name,
+                        f"The analysis identified {risk_name.lower()} based on the available evidence: {evidence}"
+                    )
+                ),
+                "why_it_matters": (
+                    {
+                        "Liquidity Risk": (
+                            f"{financial_impact} A reported current-asset cushion does not necessarily "
+                            f"mean that the company has sufficient immediately available funds. "
+                            f"Receivables may be slow to collect, inventory may not be readily "
+                            f"convertible into cash, and short-term borrowings may create additional "
+                            f"funding pressure. The investigation therefore needs to distinguish "
+                            f"accounting liquidity from actual near-term cash availability."
+                        ),
+                        "Collection Risk": (
+                            f"{financial_impact} Weak collection can convert reported revenue and "
+                            f"profit into balances that remain unrealised in cash. This may increase "
+                            f"credit-loss exposure, working-capital requirements and the risk that "
+                            f"receivables are overstated. It can also indicate aggressive credit "
+                            f"terms, customer concentration or unusual year-end revenue recognition."
+                        ),
+                        "Inventory Risk": (
+                            f"{financial_impact} Inventory directly affects both the balance sheet "
+                            f"and cost of sales. If inventory is obsolete, slow-moving, damaged or "
+                            f"incorrectly valued, assets and profit may be overstated. Inventory "
+                            f"movements should therefore be assessed against physical existence, "
+                            f"ageing, turnover and expected realisable value."
+                        ),
+                        "Leverage Risk": (
+                            f"{financial_impact} Excessive or rapidly increasing debt can create "
+                            f"interest, repayment and refinancing pressure even where reported profit "
+                            f"appears acceptable. Debt classification, covenant compliance, security "
+                            f"arrangements and repayment schedules may also affect the financial "
+                            f"statements and the assessment of going-concern risk."
+                        ),
+                        "Profitability Risk": (
+                            f"{financial_impact} Profitability movements affect the reliability of "
+                            f"reported performance and may influence management decisions and financial "
+                            f"reporting judgments. Significant changes should be separated into "
+                            f"volume, price, mix, cost and one-off effects so that sustainable "
+                            f"operating performance can be distinguished from temporary movements."
+                        ),
+                        "Cash-Flow Risk": (
+                            f"{financial_impact} Profit without corresponding operating cash generation "
+                            f"can indicate that earnings are being absorbed by receivables, inventory "
+                            f"or other working-capital requirements. Persistent weak cash conversion "
+                            f"may increase liquidity pressure and warrants reconciliation to the "
+                            f"underlying cash-flow statement and supporting balances."
+                        ),
+                        "Earnings Quality Risk": (
+                            f"{financial_impact} Earnings quality is important because accounting profit "
+                            f"can increase without a corresponding improvement in cash generation. "
+                            f"Persistent divergence may arise from weak collections, inventory build-up, "
+                            f"timing differences, aggressive revenue recognition or other accounting "
+                            f"movements and therefore requires transaction-level investigation."
+                        )
+                    }.get(
+                        risk_name,
+                        financial_impact
+                    )
+                ),
+                "implications": (
+                    {
+                        "Liquidity Risk": (
+                            "The principal investigation question is whether the company can meet "
+                            "short-term obligations from genuinely available cash and normal operating "
+                            "cash generation. Review should consider the quality and ageing of current "
+                            "assets, upcoming liabilities, borrowing maturities and any dependence "
+                            "on refinancing or additional funding."
+                        ),
+                        "Collection Risk": (
+                            "The principal investigation question is whether receivables are recoverable "
+                            "at their recorded amounts. If significant balances remain unpaid after "
+                            "year-end, are disputed, are concentrated with a few customers or have "
+                            "required repeated extensions, the recoverability assessment and any "
+                            "expected credit-loss provision should be reconsidered."
+                        ),
+                        "Inventory Risk": (
+                            "The principal investigation question is whether inventory exists, is "
+                            "appropriately valued and is expected to be sold or consumed. Material "
+                            "ageing, weak turnover, physical-count differences or inventory that has "
+                            "not moved after year-end may indicate valuation or obsolescence issues."
+                        ),
+                        "Leverage Risk": (
+                            "The principal investigation question is whether debt obligations are "
+                            "fully captured, correctly classified and realistically serviceable. "
+                            "Potential covenant breaches, overdue repayments, refinancing dependence "
+                            "or significant secured borrowing may require additional assessment."
+                        ),
+                        "Profitability Risk": (
+                            "The principal investigation question is whether reported profit represents "
+                            "repeatable operating performance. Significant one-off income, unusual "
+                            "expense movements, margin changes or late-period transactions should be "
+                            "isolated and supported before relying on the reported result."
+                        ),
+                        "Cash-Flow Risk": (
+                            "The principal investigation question is why accounting earnings are not "
+                            "converting into operating cash. Working-capital movements, non-cash items, "
+                            "supplier terms, customer collections and unusual financing or investing "
+                            "transactions should be reconciled to the cash-flow statement."
+                        ),
+                        "Earnings Quality Risk": (
+                            "The principal investigation question is whether reported earnings are "
+                            "supported by sustainable underlying activity. Persistent profit-to-cash "
+                            "divergence, large receivables or inventory movements and unusual year-end "
+                            "transactions should be tested at transaction level."
+                        )
+                    }.get(
+                        risk_name,
+                        f"The current information does not by itself establish the cause of the {risk_name.lower()}. "
+                        f"Further investigation is required to distinguish a normal business movement "
+                        f"from a movement requiring audit attention. {financial_impact}"
+                    )
+                ),
+                "what_to_check": (
+                    {
+                        "Liquidity Risk": (
+                            "Reconcile cash and cash equivalents to bank statements and the general ledger. "
+                            "Review subsequent cash movements, short-term borrowing maturities, overdue "
+                            "liabilities and expected operating cash inflows. Examine whether material "
+                            "current assets are readily realisable and identify any dependence on "
+                            "renewed borrowing or management funding. Compare the resulting liquidity "
+                            "position with near-term contractual obligations."
+                        ),
+                        "Collection Risk": (
+                            "Obtain the detailed receivables ageing and reconcile it to the general ledger. "
+                            "Identify the largest and oldest outstanding balances and trace them to invoices, "
+                            "delivery evidence, customer confirmations, subsequent receipts and credit notes. "
+                            "Review post-year-end collections and investigate balances that remain unpaid, "
+                            "disputed or repeatedly extended. Assess customer concentration and whether "
+                            "the expected credit-loss provision remains appropriate."
+                        ),
+                        "Inventory Risk": (
+                            "Reconcile the inventory listing to the general ledger and inspect the ageing "
+                            "profile. Identify slow-moving, obsolete and high-value items. Trace selected "
+                            "items to purchase records, goods received documentation and physical-count "
+                            "records. Compare quantities and valuation with post-year-end sales or usage, "
+                            "and investigate material count differences, write-downs or items with weak "
+                            "future demand. Confirm that the valuation basis remains supportable."
+                        ),
+                        "Leverage Risk": (
+                            "Obtain complete loan and borrowing schedules and reconcile principal balances "
+                            "and accrued interest to the financial statements. Review repayment dates, "
+                            "interest rates, security and refinancing arrangements. Inspect debt agreements "
+                            "for financial covenants and identify actual or potential breaches. Check "
+                            "whether current and non-current portions are correctly classified and whether "
+                            "any overdue or renegotiated borrowing requires separate consideration."
+                        ),
+                        "Profitability Risk": (
+                            "Bridge the year-on-year change in profit by analysing revenue, volume, pricing, "
+                            "gross margin and major expense categories. Investigate unusual journals, one-off "
+                            "income, significant expense reductions and late-period transactions. Reconcile "
+                            "material revenue and expense movements to supporting ledgers and source documents. "
+                            "Assess whether the reported margin is consistent with operational activity and "
+                            "whether any accounting classification or recognition issue could distort profit."
+                        ),
+                        "Cash-Flow Risk": (
+                            "Reconcile net profit to operating cash flow line by line. Identify the major "
+                            "working-capital adjustments and determine whether receivables, inventory or "
+                            "payables explain the cash shortfall. Trace significant cash movements to bank "
+                            "statements and supporting documentation. Review unusual financing, investing "
+                            "or related-party transactions and determine whether operating cash generation "
+                            "is sufficient to support normal operations and debt obligations."
+                        ),
+                        "Earnings Quality Risk": (
+                            "Compare profit with operating cash flow over the relevant periods and identify "
+                            "the largest sources of divergence. Analyse receivables, inventory and other "
+                            "working-capital movements, then test material year-end revenue and expense "
+                            "transactions. Trace significant receivables to subsequent collections and "
+                            "investigate unusual journals, one-off income, timing differences and transactions "
+                            "that increase accounting earnings without producing corresponding cash."
+                        )
+                    }.get(
+                        risk_name,
+                        f"Start by reconciling the reported figures to the underlying ledgers and "
+                        f"supporting schedules. Test the largest and most unusual movements, compare "
+                        f"them with the prior period, trace material balances to source documentation "
+                        f"and independently verify management explanations. Recommended action: "
+                        f"{recommended_action}"
+                    )
+                ),
                 "documents_required": {
     "Liquidity Risk": [
-        "Bank Statements",
-        "Cash Flow Statement",
-        "Short-Term Borrowing Schedule"
+        "Bank Statements — verify actual cash balances, unusual transfers and year-end movements.",
+        "Cash Flow Statement — reconcile operating, investing and financing cash movements with the reported liquidity position.",
+        "Short-Term Borrowing Schedule — verify repayment obligations, refinancing dependence and near-term funding requirements."
     ],
     "Collection Risk": [
-        "Aged Receivables Ledger",
-        "Customer Credit Policy",
-        "Top Customer Invoices"
+        "Aged Receivables Ledger — analyse overdue balances, ageing concentration and long-outstanding customer amounts.",
+        "Customer Credit Policy — assess whether credit terms and collection practices are consistent with the reported receivables.",
+        "Top Customer Invoices — trace significant balances to invoices, subsequent receipts, credit notes and supporting sales documentation."
     ],
     "Inventory Risk": [
-        "Inventory Ageing Report",
-        "Inventory Valuation Working",
-        "Physical Stock Count Report"
+        "Inventory Ageing Report — identify slow-moving, obsolete or unusually aged inventory.",
+        "Inventory Valuation Working — verify costing methodology, write-downs and whether carrying values remain supportable.",
+        "Physical Stock Count Report — compare recorded quantities with physical quantities and investigate material differences."
     ],
     "Leverage Risk": [
-        "Loan Schedules",
-        "Debt Repayment Schedule",
-        "Loan / Debt Covenant Agreements"
+        "Loan Schedules — reconcile principal, interest, maturity and outstanding balances to the financial statements.",
+        "Debt Repayment Schedule — assess near-term repayment pressure and refinancing requirements.",
+        "Loan / Debt Covenant Agreements — identify covenant requirements, breaches, security arrangements and potential classification implications."
     ],
     "Profitability Risk": [
-        "Detailed Profit & Loss",
-        "Cost / Expense Break-up",
-        "Gross Margin Analysis"
+        "Detailed Profit & Loss — reconcile revenue, gross profit and expenses and identify unusual period movements.",
+        "Cost / Expense Break-up — investigate significant increases, reductions, one-off items and unusual expense classifications.",
+        "Gross Margin Analysis — assess whether margin movements are consistent with pricing, volume, product mix and cost changes."
     ],
     "Cash-Flow Risk": [
-        "Cash Flow Statement",
-        "Bank Statements",
-        "Working Capital Movement Schedule"
+        "Cash Flow Statement — reconcile operating cash generation with reported profit and investigate major reconciling items.",
+        "Bank Statements — verify actual cash movements and identify unusual receipts, payments or transfers.",
+        "Working Capital Movement Schedule — analyse the effect of receivables, inventory and payables movements on cash generation."
     ],
     "Earnings Quality Risk": [
-        "Cash Flow Statement",
-        "Aged Receivables Ledger",
-        "Working Capital Movement Schedule"
+        "Cash Flow Statement — compare reported profit with operating cash generation and investigate persistent divergence.",
+        "Aged Receivables Ledger — determine whether reported revenue and profit are being converted into customer collections.",
+        "Working Capital Movement Schedule — identify whether working-capital movements explain the gap between accounting earnings and cash generation."
     ]
 }.get(risk_name, [])
             }
@@ -3421,12 +3657,6 @@ if st.session_state.active_analysis_tab == "risk":
                 unsafe_allow_html=True
             )
             documents = r.get("documents_required", [])
-            st.write(
-                r.get(
-                    "flagged_reason",
-                    "Not available"
-                )
-            )
             c1, c2 = st.columns(2)
             with c1:
                 st.markdown("#### Financial Evidence")
