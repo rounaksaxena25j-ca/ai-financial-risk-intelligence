@@ -3135,6 +3135,7 @@ if st.session_state.active_analysis_tab == "risk":
                 ):
                     st.session_state.selected_risk = r
                     st.session_state.investigation_debug = True
+                    st.rerun()
 
     else:
         st.success(
