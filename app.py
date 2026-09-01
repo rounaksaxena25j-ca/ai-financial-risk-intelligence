@@ -3272,7 +3272,155 @@ if st.session_state.active_analysis_tab == "risk":
                 unsafe_allow_html=True
             )
 
-            st.markdown("### Financial Assessment")
+            st.markdown(
+                f"""
+                <div style="
+                    margin: 18px 0 18px 0;
+                    padding: 20px 22px;
+                    border-radius: 14px;
+                    background: #FFFFFF;
+                    border: 1px solid #DCE5F0;
+                    box-shadow: 0 5px 18px rgba(15,23,42,.055);
+                ">
+                    <div style="
+                        font-size: 14px;
+                        font-weight: 850;
+                        color: #172B4D;
+                        margin-bottom: 8px;
+                    ">
+                        Financial Assessment
+                    </div>
+                    <div style="
+                        font-size: 13px;
+                        line-height: 1.7;
+                        color: #475569;
+                    ">
+                        {r.get("flagged_reason", "Not available")}
+                    </div>
+                </div>
+                <div style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 16px;
+                    margin-bottom: 18px;
+                ">
+                    <div style="
+                        padding: 20px 22px;
+                        border-radius: 14px;
+                        background: #FFFFFF;
+                        border: 1px solid #DCE5F0;
+                        box-shadow: 0 5px 18px rgba(15,23,42,.055);
+                    ">
+                        <div style="
+                            font-size: 14px;
+                            font-weight: 850;
+                            color: #172B4D;
+                            margin-bottom: 9px;
+                        ">
+                            Financial Evidence
+                        </div>
+                        <div style="
+                            padding: 14px 16px;
+                            border-radius: 10px;
+                            background: #F8FAFC;
+                            border: 1px solid #E2E8F0;
+                            color: #334155;
+                            font-size: 13px;
+                            line-height: 1.65;
+                        ">
+                            {r.get("evidence", "Not available")}
+                        </div>
+                    </div>
+                    <div style="
+                        padding: 20px 22px;
+                        border-radius: 14px;
+                        background: #FFFFFF;
+                        border: 1px solid #DCE5F0;
+                        box-shadow: 0 5px 18px rgba(15,23,42,.055);
+                    ">
+                        <div style="
+                            font-size: 14px;
+                            font-weight: 850;
+                            color: #172B4D;
+                            margin-bottom: 9px;
+                        ">
+                            Financial Impact
+                        </div>
+                        <div style="
+                            font-size: 13px;
+                            line-height: 1.7;
+                            color: #475569;
+                        ">
+                            {r.get(
+                                "why_it_matters",
+                                "Cannot determine from available data."
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 16px;
+                    margin-bottom: 18px;
+                ">
+                    <div style="
+                        padding: 20px 22px;
+                        border-radius: 14px;
+                        background: #FFFFFF;
+                        border: 1px solid #DCE5F0;
+                        box-shadow: 0 5px 18px rgba(15,23,42,.055);
+                    ">
+                        <div style="
+                            font-size: 14px;
+                            font-weight: 850;
+                            color: #172B4D;
+                            margin-bottom: 9px;
+                        ">
+                            Assessment Implication
+                        </div>
+                        <div style="
+                            font-size: 13px;
+                            line-height: 1.7;
+                            color: #475569;
+                        ">
+                            {r.get(
+                                "implications",
+                                "No additional implication available."
+                            )}
+                        </div>
+                    </div>
+                    <div style="
+                        padding: 20px 22px;
+                        border-radius: 14px;
+                        background: #FFFFFF;
+                        border: 1px solid #DCE5F0;
+                        box-shadow: 0 5px 18px rgba(15,23,42,.055);
+                    ">
+                        <div style="
+                            font-size: 14px;
+                            font-weight: 850;
+                            color: #172B4D;
+                            margin-bottom: 9px;
+                        ">
+                            Recommended Review
+                        </div>
+                        <div style="
+                            font-size: 13px;
+                            line-height: 1.7;
+                            color: #475569;
+                        ">
+                            {r.get(
+                                "what_to_check",
+                                "Additional review required."
+                            )}
+                        </div>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+            documents = r.get("documents_required", [])
             st.write(
                 r.get(
                     "flagged_reason",
