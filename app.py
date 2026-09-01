@@ -2148,6 +2148,93 @@ div[data-testid="stDataFrame"] > div {
 .risk-low .risk-card-header span:first-child {
     background: #E0F2FE !important;
 }
+
+/* ============================================================
+   FINAL INVESTIGATION DETAIL UI
+   ============================================================ */
+.investigation-panel {
+    margin-top: 14px !important;
+    margin-bottom: 18px !important;
+    padding: 22px 24px !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, #F8FBFF, #FFFFFF) !important;
+    border: 1px solid #D9E5F2 !important;
+    box-shadow: 0 8px 24px rgba(15,23,42,.06) !important;
+}
+.investigation-panel-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px !important;
+}
+.investigation-kicker {
+    font-size: 10px !important;
+    font-weight: 850 !important;
+    letter-spacing: .8px !important;
+    text-transform: uppercase !important;
+    color: #64748B !important;
+    margin-bottom: 5px !important;
+}
+.investigation-title {
+    font-size: 22px !important;
+    font-weight: 900 !important;
+    color: #102A56 !important;
+    line-height: 1.25 !important;
+}
+.investigation-level {
+    padding: 7px 13px !important;
+    border-radius: 999px !important;
+    background: #E0F2FE !important;
+    color: #0369A1 !important;
+    font-size: 11px !important;
+    font-weight: 850 !important;
+    white-space: nowrap !important;
+}
+.investigation-detail-card {
+    margin: 0 0 16px 0 !important;
+    padding: 20px 22px !important;
+    border-radius: 14px !important;
+    background: #FFFFFF !important;
+    border: 1px solid #DCE5F0 !important;
+    box-shadow: 0 5px 18px rgba(15,23,42,.055) !important;
+    color: #334155 !important;
+}
+.investigation-detail-title {
+    display: block !important;
+    margin-bottom: 9px !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+    color: #172B4D !important;
+}
+.investigation-detail-text {
+    display: block !important;
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+    color: #475569 !important;
+}
+.investigation-evidence {
+    display: block !important;
+    padding: 14px 16px !important;
+    border-radius: 10px !important;
+    background: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    color: #334155 !important;
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+}
+.investigation-evidence-item {
+    display: block !important;
+    margin: 6px 0 !important;
+    color: #475569 !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+}
+.investigation-muted {
+    color: #64748B !important;
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+}
+
 /* INVESTIGATION SECTION */
 .risk-investigation-shell {
     margin-top: 22px !important;
