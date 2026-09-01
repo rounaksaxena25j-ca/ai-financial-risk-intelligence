@@ -3157,6 +3157,7 @@ if st.session_state.active_analysis_tab == "risk":
     selected_risk = st.session_state.get("selected_risk", None)
     if selected_risk is not None:
         r = selected_risk
+        st.write("DEBUG TYPE:", type(r).__name__)
         if isinstance(r, dict):
             title = r.get("title", "Risk Item")
             badge = r.get("badge", "🔴")
