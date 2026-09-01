@@ -3165,6 +3165,7 @@ if st.session_state.active_analysis_tab == "risk":
                 "flagged_reason",
                 "Flagged by analysis engine."
             )
+            st.write("DEBUG PANEL: investigation panel reached")
             st.markdown(
                 f"""
                 <div class="investigation-panel">
